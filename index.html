@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaV Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: url('bg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        #header {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #countdown-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+        }
+        #main-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            #header {
+                font-size: 0.6em;
+            }
+            #main-title {
+                font-size: 2em;
+            }
+            #title {
+                font-size: 1.5em;
+            }
+            #countdown {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">MaV 2024</div>
+    <div id="countdown-container">
+        <div id="main-title">SWAN CHAIN</div>
+        <div id="title">On Chain Interaction Race Countdown :</div>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            // Set the target date and time in UTC
+            const targetDate = new Date('2024-06-15T02:59:00Z'); // EST is UTC-4
+            const now = new Date();
+
+            // Calculate the difference in milliseconds
+            const diff = targetDate - now;
+
+            // Time calculations for days, hours, minutes, and seconds
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="countdown"
+            document.getElementById('countdown').innerHTML =
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is over, write some text 
+            if (diff < 0) {
+                document.getElementById('countdown').innerHTML = "EXPIRED";
+            }
+        }
+
+        // Update the countdown every 1 second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
